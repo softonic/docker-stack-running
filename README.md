@@ -69,3 +69,4 @@ You need to mount two volumes:
 - `TIMEOUT`: Max number of seconds before assuming that something gone wrong
 - `COMPOSE_PROJECT_NAME`: Project name, recommended value: $(basename "$PWD")
 - `EXPECTED_CONTAINERS`: Number of expected containers running.
+- `COMPOSE_FILE`: Compose file to read. Defaults to none.
