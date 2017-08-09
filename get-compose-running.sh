@@ -1,10 +1,9 @@
 #!/bin/sh
 
 : ${TIMEOUT:=10}
-: ${COMPOSE_FILE:=}
 
 DOCKER_COMPOSE=docker-compose
-if [[ -n ${COMPOSE_FILE} ]]; then
+if [[ -n "${COMPOSE_FILE}" ]]; then
     DOCKER_COMPOSE="${DOCKER_COMPOSE} -f ${COMPOSE_FILE}"
 fi
 
