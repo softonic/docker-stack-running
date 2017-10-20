@@ -1,6 +1,7 @@
 #!/bin/sh
 
 : ${TIMEOUT:=10}
+: ${VERBOSE:=0}
 
 DOCKER_COMPOSE=docker-compose
 if [[ -n "${COMPOSE_FILE}" ]]; then
@@ -19,6 +20,9 @@ containers_running() {
         healthy=$(docker ps -q --filter "id=${id}" --filter "health=healthy" | wc -l)
         is_ok=$((noHealth + healthy))
         num_ok=$((num_ok + is_ok))
+        if [ ${VERBOSE} -eq 1 ]; then
+            docker ps --filter "id=${id}" --format="{{ .Names }} {{ .Status }}"
+        fi
     done
 
     if [ "$num_ids" -gt 0 ] && [ "$num_ok" -eq "$num_ids" ]; then
