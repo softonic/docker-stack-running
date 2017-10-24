@@ -28,7 +28,8 @@ LABEL org.label-schema.vendor="softonic" \
     org.label-schema.docker.params="TIMEOUT=Max number of seconds before assume something gone wrong \
         COMPOSE_PROJECT_NAME=Project name used when launching the compose file \
         EXPECTED_CONTAINERS=Number of expected running containers \
-        COMPOSE_FILE=Compose file to read. Defaults to none"
+        COMPOSE_FILE=Compose file to read. Defaults to none \
+        VERBOSE=Output container name if activated (1 for active, 0 for disabled. Defaults to 0)"
 
 RUN apk add --no-cache py-pip && pip install "docker-compose==${DOCKER_COMPOSE_VERSION}"
 
