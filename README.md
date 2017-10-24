@@ -70,3 +70,4 @@ You need to mount two volumes:
 - `COMPOSE_PROJECT_NAME`: Project name, recommended value: $(basename "$PWD")
 - `EXPECTED_CONTAINERS`: Number of expected containers running.
 - `COMPOSE_FILE`: Compose file to read. Defaults to none.
+- `VERBOSE`: Output container name if activated (1 for active, 0 for disabled. Defaults to 0)
