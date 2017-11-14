@@ -1,12 +1,12 @@
-FROM docker:17.05.0-ce-dind
+FROM docker:17.10.0-ce-dind
 
-ARG "version=0.1.0-dev"
-ARG "build_date=unknown"
-ARG "commit_hash=unknown"
-ARG "vcs_url=unknown"
-ARG "vcs_branch=unknown"
+ARG version="0.1.0-dev"
+ARG build_date="unknown"
+ARG commit_hash="unknown"
+ARG vcs_url="unknown"
+ARG vcs_branch="unknown"
 
-ENV DOCKER_COMPOSE_VERSION 1.13.0
+ENV DOCKER_COMPOSE_VERSION 1.17.1
 
 LABEL org.label-schema.vendor="softonic" \
     org.label-schema.name="compose-project-running" \

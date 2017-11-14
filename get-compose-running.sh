@@ -8,11 +8,12 @@ if [[ -n "${COMPOSE_FILE}" ]]; then
     DOCKER_COMPOSE="${DOCKER_COMPOSE} -f ${COMPOSE_FILE}"
 fi
 
+[[ ! -z ${EXPECTED_CONTAINERS+x} ]] && num_ids="${EXPECTED_CONTAINERS}"
+
 containers_running() {
     ids=$(${DOCKER_COMPOSE} ps -q 2>/dev/null)
-    num_ids=$(echo $ids | wc -w)
 
-    [[ ! -z ${EXPECTED_CONTAINERS+x} ]] && num_ids="${EXPECTED_CONTAINERS}"
+    [[ -z ${num_ids} ]] && num_ids=$(echo $ids | wc -w)
 
     num_ok=0
     for id in $ids; do
