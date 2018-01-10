@@ -1,4 +1,4 @@
-# softonic/compose-project-running
+# softonic/compose-project-is-up
 
 Waits until a compose project is running, with a defined timeout.
 
