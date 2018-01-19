@@ -21,7 +21,7 @@ containers_running() {
         healthy=$(docker ps -q --filter "id=${id}" --filter "health=healthy" | wc -l)
         is_ok=$((noHealth + healthy))
         num_ok=$((num_ok + is_ok))
-        is_dead=$((1 - noHealth + healthy))
+        is_dead=$(docker ps -a --filter "id=${id}" --filter=status=exited)
 
         if [ ${is_dead} -eq 1 ]; then
             consumer_name=$(docker ps -a --filter="id=${id}" --format="{{ .Names }}")
