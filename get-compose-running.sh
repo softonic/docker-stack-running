@@ -21,12 +21,15 @@ containers_running() {
         healthy=$(docker ps -q --filter "id=${id}" --filter "health=healthy" | wc -l)
         is_ok=$((noHealth + healthy))
         num_ok=$((num_ok + is_ok))
-        is_dead=$((1 - noHealth + healthy))
+        is_dead=$(docker ps -q -a --filter "id=${id}" --filter=status=exited | wc -l)
 
-        if [ ${is_dead} -eq 1 ]; then
-            consumer_name=$(docker ps -a --filter="id=${id}" --format="{{ .Names }}")
-            echo -e "\nERROR: Container '$consumer_name' is DEAD\n"
-            docker logs ${id} | tail -n100
+        if [ ${is_dead} -gt 0 ]; then
+            dead_ids=$(docker ps -q -a --filter "id=${id}" --filter=status=exited)
+            for did in $dead_ids; do
+                consumer_name=$(docker ps -a --filter="id=${did}" --format="{{ .Names }}")
+                echo -e "\nERROR: Container '$consumer_name' is DEAD\n"
+                docker logs ${id} | tail -n100
+            done
             exit 1
         fi
 
