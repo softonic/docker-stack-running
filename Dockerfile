@@ -9,10 +9,10 @@ ARG vcs_branch="unknown"
 ENV DOCKER_COMPOSE_VERSION 1.17.1
 
 LABEL org.label-schema.vendor="softonic" \
-    org.label-schema.name="compose-project-running" \
-    org.label-schema.description="Waits until a compose project is running" \
+    org.label-schema.name="stack-running" \
+    org.label-schema.description="Waits until a stack is running" \
     org.label-schema.usage="/src/README.md" \
-    org.label-schema.url="https://github.com/softonic/docker-compose-project-running/blob/master/README.md" \
+    org.label-schema.url="https://github.com/softonic/docker-stack-running/blob/master/README.md" \
     org.label-schema.vcs-url=$vcs_url \
     org.label-schema.vcs-branch=$vcs_branch \
     org.label-schema.vcs-ref=$commit_hash \
@@ -20,21 +20,16 @@ LABEL org.label-schema.vendor="softonic" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.build-date=$build_date \
     org.label-schema.docker.cmd="docker run --rm \
-        -v \${PWD}/.:/project:ro \
         -v /var/run/docker.sock:/var/run/docker.sock:ro \
         -e TIMEOUT=30 \
-        -e COMPOSE_PROJECT_NAME=$(basename \"\$PWD\") \
-        softonic/compose-project-is-up" \
+        -e STACK_NAME=myStack \
+        softonic/stack-is-up" \
     org.label-schema.docker.params="TIMEOUT=Max number of seconds before assume something gone wrong \
-        COMPOSE_PROJECT_NAME=Project name used when launching the compose file \
-        EXPECTED_CONTAINERS=Number of expected running containers \
-        COMPOSE_FILE=Compose file to read. Defaults to none \
+        STACK_NAME=Stack name used when launching the compose file \
         VERBOSE=Output container name if activated (1 for active, 0 for disabled. Defaults to 0)"
 
-RUN apk add --no-cache py-pip && pip install "docker-compose==${DOCKER_COMPOSE_VERSION}"
-
-COPY ./get-compose-running.sh /get-compose-running.sh
+COPY ./get-stack-running.sh /get-stack-running.sh
 
 WORKDIR /project
 
-CMD ["/get-compose-running.sh"]
+CMD ["/get-stack-running.sh"]
