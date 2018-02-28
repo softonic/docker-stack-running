@@ -34,6 +34,7 @@ docker build -t softonic/stack-is-up .
 docker run --rm \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -e TIMEOUT=30 \
+  -e EXPECTED_SERVICES=3 \
   -e STACK_NAME=myStack \
   softonic/stack-is-up
 ```
@@ -49,5 +50,6 @@ You need to mount two volumes:
 ### Parameters
 
 - `TIMEOUT`: Max number of seconds before assuming that something gone wrong
+- `EXPECTED_SERVICES`: Number of expected services running.
 - `STACK_NAME`: Stack name
 - `VERBOSE`: Output container name if activated (1 for active, 0 for disabled. Defaults to 0)

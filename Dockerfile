@@ -22,9 +22,11 @@ LABEL org.label-schema.vendor="softonic" \
     org.label-schema.docker.cmd="docker run --rm \
         -v /var/run/docker.sock:/var/run/docker.sock:ro \
         -e TIMEOUT=30 \
+        -e EXPECTED_SERVICES=3 \
         -e STACK_NAME=myStack \
         softonic/stack-is-up" \
     org.label-schema.docker.params="TIMEOUT=Max number of seconds before assume something gone wrong \
+        EXPECTED_SERVICES=Number of expected services running \
         STACK_NAME=Stack name used when launching the compose file \
         VERBOSE=Output container name if activated (1 for active, 0 for disabled. Defaults to 0)"
 
