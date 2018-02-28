@@ -11,7 +11,7 @@ For example, imagine you want to execute some integration tests in your image. Y
 
 ``` bash
 docker stack deploy -f docker-compose.yml mystack
-// Run feature tests
+// Run feature tests.
 docker stack rm mystack
 ```
 
