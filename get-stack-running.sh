@@ -18,7 +18,7 @@ then
 fi
 
 containers_running() {
-    num_ok=$(docker stack ps ${STACK_NAME} --filter='desired-state=running' | tail -n+2 | awk '{ print $5}' | grep 'Running' | wc -l);
+    num_ok=$(docker stack ps ${STACK_NAME} --filter='desired-state=running' | tail -n+2 | awk '{ print $6}' | grep 'Running' | wc -l);
     num_ids=$EXPECTED_SERVICES
 
     if [ "$num_ids" -gt 0 ] && [ "$num_ok" -eq "$num_ids" ]; then
